@@ -5,19 +5,20 @@
   
 
   
-  <title>Hello World | Hexo</title>
+  <title>centos下安装配置supervisor | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="Supervisor目前只支持Python2.7，可以监控运行python3的程序 centos下部署：  pip   install  supervisor  创建配置文件：echo_supervisord_conf &amp;gt; /etc/supervisord.conf    3.配置管理： 默认的配置文件是下面这样的，但是这里有个坑需要注意，supervisord.pid 以及 supervi">
+<meta name="keywords" content="后端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/12/18/hello-world/index.html">
+<meta property="og:title" content="centos下安装配置supervisor">
+<meta property="og:url" content="http://yoursite.com/2018/12/22/centos下安装配置supervisor/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="Supervisor目前只支持Python2.7，可以监控运行python3的程序 centos下部署：  pip   install  supervisor  创建配置文件：echo_supervisord_conf &amp;gt; /etc/supervisord.conf    3.配置管理： 默认的配置文件是下面这样的，但是这里有个坑需要注意，supervisord.pid 以及 supervi">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-18T02:44:34.848Z">
+<meta property="og:updated_time" content="2018-12-21T17:06:55.389Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="centos下安装配置supervisor">
+<meta name="twitter:description" content="Supervisor目前只支持Python2.7，可以监控运行python3的程序 centos下部署：  pip   install  supervisor  创建配置文件：echo_supervisord_conf &amp;gt; /etc/supervisord.conf    3.配置管理： 默认的配置文件是下面这样的，但是这里有个坑需要注意，supervisord.pid 以及 supervi">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -64,10 +65,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-centos下安装配置supervisor" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/12/18/hello-world/" class="article-date">
-  <time datetime="2018-12-18T02:44:34.846Z" itemprop="datePublished">2018-12-18</time>
+    <a href="/2018/12/22/centos下安装配置supervisor/" class="article-date">
+  <time datetime="2018-12-21T17:02:39.000Z" itemprop="datePublished">2018-12-22</time>
 </a>
     
   </div>
@@ -78,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      centos下安装配置supervisor
     </h1>
   
 
@@ -86,37 +87,37 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>Supervisor目前只支持Python2.7，可以监控运行python3的程序</p>
+<p>centos下部署：</p>
+<ol>
+<li><p>pip   install  supervisor</p>
+</li>
+<li><p>创建配置文件：<br>echo_supervisord_conf &gt; /etc/supervisord.conf </p>
+</li>
+</ol>
+<p>3.配置管理：</p>
+<p>默认的配置文件是下面这样的，但是这里有个坑需要注意，supervisord.pid 以及 supervisor.sock 是放在 /tmp 目录下，但是 /tmp 目录是存放临时文件，里面的文件是会被 Linux 系统删除的，一旦这些文件丢失，就无法再通过 supervisorctl 来执行 restart 和 stop 命令了，将只会得到 unix:///tmp/supervisor.sock 不存在的错误 。<br>因此可以单独建一个文件夹，来存放这些文件，比如放在 /home/supervisor/</p>
+<p>创建文件夹<br>mkdir /home/supervisor<br>mkdir /var/log/supervisor<br>mkdir /etc/supervisor.d<br>更多详细步骤看这个链接<a href="https://www.restran.net/2015/10/04/supervisord-tutorial/" target="_blank" rel="noopener">https://www.restran.net/2015/10/04/supervisord-tutorial/</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/18/hello-world/" data-id="cjpyacctj00011ktowj5i3qly" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/22/centos下安装配置supervisor/" data-id="cjpyad9yp0000iktoi03cm35a" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后端/">后端</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2018/12/21/ubuntu下搭建celery-mq/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          ubuntu下搭建celery+mq
-        
-      </div>
-    </a>
   
+    <a href="/2018/12/21/ubuntu下搭建celery-mq/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ubuntu下搭建celery+mq</div>
+    </a>
   
 </nav>
 
