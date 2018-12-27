@@ -467,7 +467,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/22/centos下安装配置supervisor/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/回望2018-展望2019/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -486,7 +486,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/22/centos下安装配置supervisor/" itemprop="url">centos下安装配置supervisor</a></h1>
+                <a class="post-title-link" href="/2018/12/21/回望2018-展望2019/" itemprop="url">ubuntu下搭建celery+mq</a></h1>
         
 
         <div class="post-meta">
@@ -498,8 +498,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-22T01:02:39+08:00">
-                2018-12-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-21T23:54:01+08:00">
+                2018-12-21
               </time>
             
 
@@ -538,18 +538,7 @@
       
         
           
-            <p>Supervisor目前只支持Python2.7，可以监控运行python3的程序</p>
-<p>centos下部署：</p>
-<ol>
-<li><p>pip   install  supervisor</p>
-</li>
-<li><p>创建配置文件：<br>echo_supervisord_conf &gt; /etc/supervisord.conf </p>
-</li>
-</ol>
-<p>3.配置管理：</p>
-<p>默认的配置文件是下面这样的，但是这里有个坑需要注意，supervisord.pid 以及 supervisor.sock 是放在 /tmp 目录下，但是 /tmp 目录是存放临时文件，里面的文件是会被 Linux 系统删除的，一旦这些文件丢失，就无法再通过 supervisorctl 来执行 restart 和 stop 命令了，将只会得到 unix:///tmp/supervisor.sock 不存在的错误 。<br>因此可以单独建一个文件夹，来存放这些文件，比如放在 /home/supervisor/</p>
-<p>创建文件夹<br>mkdir /home/supervisor<br>mkdir /var/log/supervisor<br>mkdir /etc/supervisor.d<br>更多详细步骤看这个链接<a href="https://www.restran.net/2015/10/04/supervisord-tutorial/" target="_blank" rel="noopener">https://www.restran.net/2015/10/04/supervisord-tutorial/</a></p>
-
+            
           
         
       
@@ -703,125 +692,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/回望2018-展望2019/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="全栈工程师">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/21/回望2018-展望2019/" itemprop="url">ubuntu下搭建celery+mq</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-21T23:54:01+08:00">
-                2018-12-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -868,7 +738,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
