@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+	
+<script type="text/javascript" src="/js/src/love.js"></script>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="技术,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="安装前准备最新mongodb下载链接查找方式进入官网：https://www.mongodb.com/download-center?jmp=nav#community点击 Community Server，再点击 linuxversion(版本)选择 Linux 64-bit legacy x64然后DOWNLOAD下载按钮右边有个下载链，https://***，如下https://fastdl">
+<meta name="keywords" content="技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos6.8下b部署mongodb">
+<meta property="og:url" content="http://yoursite.com/2018/12/28/centos6.8下b部署mongodb/index.html">
+<meta property="og:site_name" content="全栈工程师">
+<meta property="og:description" content="安装前准备最新mongodb下载链接查找方式进入官网：https://www.mongodb.com/download-center?jmp=nav#community点击 Community Server，再点击 linuxversion(版本)选择 Linux 64-bit legacy x64然后DOWNLOAD下载按钮右边有个下载链，https://***，如下https://fastdl">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-28T03:26:56.008Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="centos6.8下b部署mongodb">
+<meta name="twitter:description" content="安装前准备最新mongodb下载链接查找方式进入官网：https://www.mongodb.com/download-center?jmp=nav#community点击 Community Server，再点击 linuxversion(版本)选择 Linux 64-bit legacy x64然后DOWNLOAD下载按钮右边有个下载链，https://***，如下https://fastdl">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/28/centos6.8下b部署mongodb/">
+
+
+
+
+
+  <title>centos6.8下b部署mongodb | 全栈工程师</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">全栈工程师</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/28/centos6.8下b部署mongodb/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄松辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="全栈工程师">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">centos6.8下b部署mongodb</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-28T11:20:54+08:00">
+                2018-12-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h3><p>最新mongodb下载链接查找方式<br>进入官网：<a href="https://www.mongodb.com/download-center?jmp=nav#community" target="_blank" rel="noopener">https://www.mongodb.com/download-center?jmp=nav#community</a><br>点击 Community Server，再点击 linux<br>version(版本)选择 Linux 64-bit legacy x64<br>然后DOWNLOAD下载按钮右边有个下载链，https://***，如下<br><a href="https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-4.0.2.tgz" target="_blank" rel="noopener">https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-4.0.2.tgz</a></p>
+<h3 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h3><p>进入home目录，我一般下载文件都在这个目录<br>cd /home</p>
+<h3 id="下载mongodb"><a href="#下载mongodb" class="headerlink" title="下载mongodb"></a>下载mongodb</h3><p>wget <a href="https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-4.0.2.tgz" target="_blank" rel="noopener">https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-4.0.2.tgz</a></p>
+<h3 id="解压mongodb"><a href="#解压mongodb" class="headerlink" title="解压mongodb"></a>解压mongodb</h3><p>tar -zxvf mongodb-linux-x86_64-4.0.2.tgz</p>
+<h3 id="重命名解压的文件"><a href="#重命名解压的文件" class="headerlink" title="重命名解压的文件"></a>重命名解压的文件</h3><p>mv mongodb-linux-x86_64-4.0.2 mongodb</p>
+<h3 id="将安装包移动到你需要安装的所在目录"><a href="#将安装包移动到你需要安装的所在目录" class="headerlink" title="将安装包移动到你需要安装的所在目录"></a>将安装包移动到你需要安装的所在目录</h3><p>mv mongodb /usr/local/</p>
+<h3 id="进入安装目录"><a href="#进入安装目录" class="headerlink" title="进入安装目录"></a>进入安装目录</h3><p>cd /usr/local/mongodb</p>
+<h3 id="创建数据存放目录"><a href="#创建数据存放目录" class="headerlink" title="创建数据存放目录"></a>创建数据存放目录</h3><p>mkdir -p data/db</p>
+<h3 id="创建日志存放目录"><a href="#创建日志存放目录" class="headerlink" title="创建日志存放目录"></a>创建日志存放目录</h3><p>mkdir logs</p>
+<h3 id="进入日志目录"><a href="#进入日志目录" class="headerlink" title="进入日志目录"></a>进入日志目录</h3><p>cd logs</p>
+<h3 id="创建日志文件"><a href="#创建日志文件" class="headerlink" title="创建日志文件"></a>创建日志文件</h3><p>touch mongodb.log</p>
+<h3 id="回到-进入mongodb的（启动文件）bin目录"><a href="#回到-进入mongodb的（启动文件）bin目录" class="headerlink" title="回到/进入mongodb的（启动文件）bin目录"></a>回到/进入mongodb的（启动文件）bin目录</h3><p>cd /usr/local/mongodb/bin</p>
+<h3 id="创建配置文件"><a href="#创建配置文件" class="headerlink" title="创建配置文件"></a>创建配置文件</h3><p>vim mongodb.conf</p>
+<h3 id="mongodb-conf-配置如下"><a href="#mongodb-conf-配置如下" class="headerlink" title="mongodb.conf 配置如下"></a>mongodb.conf 配置如下</h3><p>dbpath=/usr/local/mongodb/data/db/<br>logpath=/usr/local/mongodb/logs/mongodb.log<br>logappend=true<br>port=18000<br>fork=true</p>
+<p>#auth=true</p>
+<p>#bind_ip=0.0.0.0</p>
+<h3 id="配置文件保存成功后安装完成"><a href="#配置文件保存成功后安装完成" class="headerlink" title="配置文件保存成功后安装完成"></a>配置文件保存成功后安装完成</h3><h3 id="二、测试"><a href="#二、测试" class="headerlink" title="二、测试"></a>二、测试</h3><p>运行mongodb（指定配置文件方式运行）<br>/usr/local/mongodb/bin/mongod -f /usr/local/mongodb/bin/mongodb.conf</p>
+<h3 id="连接-mongodb"><a href="#连接-mongodb" class="headerlink" title="连接 mongodb"></a>连接 mongodb</h3><p>/usr/local/mongodb/bin/mongo 127.0.0.1:18000</p>
+<h3 id="显示如下信息则mongo连接成功"><a href="#显示如下信息则mongo连接成功" class="headerlink" title="显示如下信息则mongo连接成功"></a>显示如下信息则mongo连接成功</h3><p>[root@izuf62i2y5nf0va4hjv5ntz bin]# /usr/local/mongodb/bin/mongo 127.0.0.1:18000<br>MongoDB shell version v4.0.2<br>connecting to: mongodb://127.0.0.1:18000/test<br>MongoDB server version: 4.0.2</p>
+<blockquote>
+</blockquote>
+<h3 id="三、创建管理员用户：root"><a href="#三、创建管理员用户：root" class="headerlink" title="三、创建管理员用户：root"></a>三、创建管理员用户：root</h3><h3 id="刚安装的mongodb是没有用户及安全设置的，这时我们需要创建一个管理员用户。-步骤如下：连接数据库，use-admin数据库，然后创建root用户这三步。"><a href="#刚安装的mongodb是没有用户及安全设置的，这时我们需要创建一个管理员用户。-步骤如下：连接数据库，use-admin数据库，然后创建root用户这三步。" class="headerlink" title="刚安装的mongodb是没有用户及安全设置的，这时我们需要创建一个管理员用户。 步骤如下：连接数据库，use admin数据库，然后创建root用户这三步。"></a>刚安装的mongodb是没有用户及安全设置的，这时我们需要创建一个管理员用户。 步骤如下：连接数据库，use admin数据库，然后创建root用户这三步。</h3><p>/usr/local/mongodb/bin/mongo 127.0.0.1:18000<br>use admin<br>db.createUser({user:”root”,pwd:”admin”,roles:[{role:”root”,db:”admin”}]})</p>
+<h3 id="创建完成后-ctrl-c-退出连接"><a href="#创建完成后-ctrl-c-退出连接" class="headerlink" title="创建完成后 ctrl + c 退出连接"></a>创建完成后 ctrl + c 退出连接</h3><h3 id="然后修改-mongodb-conf-配置文件"><a href="#然后修改-mongodb-conf-配置文件" class="headerlink" title="然后修改 mongodb.conf 配置文件"></a>然后修改 mongodb.conf 配置文件</h3><p>vim /usr/local/mongodb/bin/mongodb.conf</p>
+<h3 id="把auth-true注释打开，如下"><a href="#把auth-true注释打开，如下" class="headerlink" title="把auth=true注释打开，如下"></a>把auth=true注释打开，如下</h3><p>dbpath=/usr/local/mongodb/data/db/<br>logpath=/usr/local/mongodb/logs/mongodb.log<br>logappend=true<br>port=18000<br>fork=true<br>auth=true</p>
+<p>#bind_ip=0.0.0.0</p>
+<h3 id="接下来查看mongodb进程"><a href="#接下来查看mongodb进程" class="headerlink" title="接下来查看mongodb进程"></a>接下来查看mongodb进程</h3><p>ps -aux | grep mongod</p>
+<h3 id="如下"><a href="#如下" class="headerlink" title="如下"></a>如下</h3><p>[root@izuf62i2y5nf0va4hjv5ntz bin]# ps -aux | grep mongod<br>root      8593  0.2  0.9 1003952 75492 ?       SLl  14:53   0:02 /usr/local/mongodb/bin/mongod -f /usr/local/mongodb/bin/mongodb.conf<br>root      8702  0.0  0.0 112648   968 pts/1    S+   15:08   0:00 grep –color=auto mongod</p>
+<h3 id="然后-结束进程并重启mongodb服务"><a href="#然后-结束进程并重启mongodb服务" class="headerlink" title="然后 结束进程并重启mongodb服务"></a>然后 结束进程并重启mongodb服务</h3><p>kill -9 8593<br>/usr/local/mongodb/bin/mongod -f /usr/local/mongodb/bin/mongodb.conf</p>
+<h3 id="再次连接-mongodb"><a href="#再次连接-mongodb" class="headerlink" title="再次连接 mongodb"></a>再次连接 mongodb</h3><p>/usr/local/mongodb/bin/mongo 127.0.0.1：18000</p>
+<h3 id="验证管理员用户，如下，返回1则代表用户验证登陆成功"><a href="#验证管理员用户，如下，返回1则代表用户验证登陆成功" class="headerlink" title="验证管理员用户，如下，返回1则代表用户验证登陆成功"></a>验证管理员用户，如下，返回1则代表用户验证登陆成功</h3><blockquote>
+<p>use admin<br>switched to db admin<br>db.auth(“root”,”admin”)<br>1<br>show dbs<br>admin      0.000GB<br>config     0.000GB<br>eastmoney  0.000GB<br>local      0.000GB</p>
+</blockquote>
+<h3 id="四、设置远程连接"><a href="#四、设置远程连接" class="headerlink" title="四、设置远程连接"></a>四、设置远程连接</h3><h3 id="修改-mongodb-conf-配置文件"><a href="#修改-mongodb-conf-配置文件" class="headerlink" title="修改 mongodb.conf 配置文件"></a>修改 mongodb.conf 配置文件</h3><p>vim /usr/local/mongodb/bin/mongodb.conf</p>
+<h3 id="把-bind-ip-0-0-0-0-注释打开"><a href="#把-bind-ip-0-0-0-0-注释打开" class="headerlink" title="把 bind_ip=0.0.0.0 注释打开"></a>把 bind_ip=0.0.0.0 注释打开</h3><p>dbpath=/usr/local/mongodb/data/db/<br>logpath=/usr/local/mongodb/logs/mongodb.log<br>logappend=true<br>port=18000<br>fork=true<br>auth=true<br>bind_ip=0.0.0.0</p>
+<h3 id="保存配置文件后重启一下：分以下3步"><a href="#保存配置文件后重启一下：分以下3步" class="headerlink" title="保存配置文件后重启一下：分以下3步"></a>保存配置文件后重启一下：分以下3步</h3><p>ps -aux | grep mongod<br>kill -9 进程号<br>/usr/local/mongodb/bin/mongod -f /usr/local/mongodb/bin/mongodb.conf</p>
+<h3 id="启动成功则代表远程访问开启，接下来可以用远程工具输入-ip-port-用户名，密码-连接-mongodb-了"><a href="#启动成功则代表远程访问开启，接下来可以用远程工具输入-ip-port-用户名，密码-连接-mongodb-了" class="headerlink" title="启动成功则代表远程访问开启，接下来可以用远程工具输入 ip:port, 用户名，密码 连接 mongodb 了"></a>启动成功则代表远程访问开启，接下来可以用远程工具输入 ip:port, 用户名，密码 连接 mongodb 了</h3><h3 id="五、配置开机启动"><a href="#五、配置开机启动" class="headerlink" title="五、配置开机启动"></a>五、配置开机启动</h3><h3 id="这里我用的是加一条shell命令进-etc-bashrc-文件里面，这样系统一开机加载这个文件就会启动mongodb服务了。-在-etc-bashrc文件末尾添加-mongodb-启动命令，如下"><a href="#这里我用的是加一条shell命令进-etc-bashrc-文件里面，这样系统一开机加载这个文件就会启动mongodb服务了。-在-etc-bashrc文件末尾添加-mongodb-启动命令，如下" class="headerlink" title="这里我用的是加一条shell命令进 /etc/bashrc 文件里面，这样系统一开机加载这个文件就会启动mongodb服务了。 在/etc/bashrc文件末尾添加 mongodb 启动命令，如下"></a>这里我用的是加一条shell命令进 /etc/bashrc 文件里面，这样系统一开机加载这个文件就会启动mongodb服务了。 在/etc/bashrc文件末尾添加 mongodb 启动命令，如下</h3><h1 id="mongodb"><a href="#mongodb" class="headerlink" title="mongodb"></a>mongodb</h1><p>/usr/local/mongodb/bin/mongod -f /usr/local/mongodb/bin/mongodb.conf</p>
+<p>###保存退出后，更新一下此文件<br>source /etc/bashrc</p>
+<p>###至此，mongodb配置完毕，包括（绑定指定端口，创建超级用户及配置验证权限连接，设置远程访问）<br>六、附：</p>
+<h3 id="1、mongodb的启动，登陆和关闭"><a href="#1、mongodb的启动，登陆和关闭" class="headerlink" title="1、mongodb的启动，登陆和关闭"></a>1、mongodb的启动，登陆和关闭</h3><p>启动mongodb：<br>/usr/local/mongodb/bin/mongod -f /usr/local/mongodb/bin/mongodb.conf</p>
+<h3 id="关闭mongodb："><a href="#关闭mongodb：" class="headerlink" title="关闭mongodb："></a>关闭mongodb：</h3><p>ps -aux | grep mongod<br>kill -2 pid</p>
+<h3 id="登陆mongodb："><a href="#登陆mongodb：" class="headerlink" title="登陆mongodb："></a>登陆mongodb：</h3><p>/usr/local/mongodb/bin/mongo 127.0.0.1:18000</p>
+<h3 id="2、修改root密码"><a href="#2、修改root密码" class="headerlink" title="2、修改root密码"></a>2、修改root密码</h3><p>非auth验证方式启动mongo:<br>把mongodb.conf的auth注释掉<br>vim /usr/local/mongodb/bin/mongodb.conf</p>
+<p>#auth=true</p>
+<h3 id="启动mongodb："><a href="#启动mongodb：" class="headerlink" title="启动mongodb："></a>启动mongodb：</h3><p>/usr/local/mongodb/bin/mongod -f /usr/local/mongodb/bin/mongodb.conf</p>
+<h3 id="登陆mongodb：-1"><a href="#登陆mongodb：-1" class="headerlink" title="登陆mongodb："></a>登陆mongodb：</h3><p>/usr/local/mongodb/bin/mongo 127.0.0.1:18000</p>
+<h3 id="查看当前所有账户"><a href="#查看当前所有账户" class="headerlink" title="查看当前所有账户"></a>查看当前所有账户</h3><p>db.system.users.find()</p>
+<p>###删除所有用户<br>db.system.users.remove({})</p>
+<h3 id="创建新的管理员帐号"><a href="#创建新的管理员帐号" class="headerlink" title="创建新的管理员帐号"></a>创建新的管理员帐号</h3><p>use admin<br>db.createUser({user:”root”,pwd:”hyht123”,roles:[{“role”:”root”,”db”:”admin”}]}) </p>
+<h3 id="重启服务："><a href="#重启服务：" class="headerlink" title="重启服务："></a>重启服务：</h3><p>use admin<br>db.auth(“root”,”hyht123”)<br>db.shutdownServer()  该命令要在root管理员权限下执行<br>5.以auth方式启动mongo</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术/" rel="tag"># 技术</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/28/nname/" rel="next" title="nname">
+                <i class="fa fa-chevron-left"></i> nname
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTg2Ny8xODQxMw=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">黄松辉</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装前准备"><span class="nav-number">1.</span> <span class="nav-text">安装前准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一、安装"><span class="nav-number">2.</span> <span class="nav-text">一、安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载mongodb"><span class="nav-number">3.</span> <span class="nav-text">下载mongodb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解压mongodb"><span class="nav-number">4.</span> <span class="nav-text">解压mongodb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重命名解压的文件"><span class="nav-number">5.</span> <span class="nav-text">重命名解压的文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将安装包移动到你需要安装的所在目录"><span class="nav-number">6.</span> <span class="nav-text">将安装包移动到你需要安装的所在目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进入安装目录"><span class="nav-number">7.</span> <span class="nav-text">进入安装目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据存放目录"><span class="nav-number">8.</span> <span class="nav-text">创建数据存放目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建日志存放目录"><span class="nav-number">9.</span> <span class="nav-text">创建日志存放目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进入日志目录"><span class="nav-number">10.</span> <span class="nav-text">进入日志目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建日志文件"><span class="nav-number">11.</span> <span class="nav-text">创建日志文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回到-进入mongodb的（启动文件）bin目录"><span class="nav-number">12.</span> <span class="nav-text">回到/进入mongodb的（启动文件）bin目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建配置文件"><span class="nav-number">13.</span> <span class="nav-text">创建配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mongodb-conf-配置如下"><span class="nav-number">14.</span> <span class="nav-text">mongodb.conf 配置如下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件保存成功后安装完成"><span class="nav-number">15.</span> <span class="nav-text">配置文件保存成功后安装完成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、测试"><span class="nav-number">16.</span> <span class="nav-text">二、测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接-mongodb"><span class="nav-number">17.</span> <span class="nav-text">连接 mongodb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示如下信息则mongo连接成功"><span class="nav-number">18.</span> <span class="nav-text">显示如下信息则mongo连接成功</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、创建管理员用户：root"><span class="nav-number">19.</span> <span class="nav-text">三、创建管理员用户：root</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#刚安装的mongodb是没有用户及安全设置的，这时我们需要创建一个管理员用户。-步骤如下：连接数据库，use-admin数据库，然后创建root用户这三步。"><span class="nav-number">20.</span> <span class="nav-text">刚安装的mongodb是没有用户及安全设置的，这时我们需要创建一个管理员用户。 步骤如下：连接数据库，use admin数据库，然后创建root用户这三步。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建完成后-ctrl-c-退出连接"><span class="nav-number">21.</span> <span class="nav-text">创建完成后 ctrl + c 退出连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#然后修改-mongodb-conf-配置文件"><span class="nav-number">22.</span> <span class="nav-text">然后修改 mongodb.conf 配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#把auth-true注释打开，如下"><span class="nav-number">23.</span> <span class="nav-text">把auth=true注释打开，如下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接下来查看mongodb进程"><span class="nav-number">24.</span> <span class="nav-text">接下来查看mongodb进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如下"><span class="nav-number">25.</span> <span class="nav-text">如下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#然后-结束进程并重启mongodb服务"><span class="nav-number">26.</span> <span class="nav-text">然后 结束进程并重启mongodb服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再次连接-mongodb"><span class="nav-number">27.</span> <span class="nav-text">再次连接 mongodb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证管理员用户，如下，返回1则代表用户验证登陆成功"><span class="nav-number">28.</span> <span class="nav-text">验证管理员用户，如下，返回1则代表用户验证登陆成功</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、设置远程连接"><span class="nav-number">29.</span> <span class="nav-text">四、设置远程连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-mongodb-conf-配置文件"><span class="nav-number">30.</span> <span class="nav-text">修改 mongodb.conf 配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#把-bind-ip-0-0-0-0-注释打开"><span class="nav-number">31.</span> <span class="nav-text">把 bind_ip=0.0.0.0 注释打开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保存配置文件后重启一下：分以下3步"><span class="nav-number">32.</span> <span class="nav-text">保存配置文件后重启一下：分以下3步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动成功则代表远程访问开启，接下来可以用远程工具输入-ip-port-用户名，密码-连接-mongodb-了"><span class="nav-number">33.</span> <span class="nav-text">启动成功则代表远程访问开启，接下来可以用远程工具输入 ip:port, 用户名，密码 连接 mongodb 了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、配置开机启动"><span class="nav-number">34.</span> <span class="nav-text">五、配置开机启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这里我用的是加一条shell命令进-etc-bashrc-文件里面，这样系统一开机加载这个文件就会启动mongodb服务了。-在-etc-bashrc文件末尾添加-mongodb-启动命令，如下"><span class="nav-number">35.</span> <span class="nav-text">这里我用的是加一条shell命令进 /etc/bashrc 文件里面，这样系统一开机加载这个文件就会启动mongodb服务了。 在/etc/bashrc文件末尾添加 mongodb 启动命令，如下</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#mongodb"><span class="nav-number"></span> <span class="nav-text">mongodb</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、mongodb的启动，登陆和关闭"><span class="nav-number">1.</span> <span class="nav-text">1、mongodb的启动，登陆和关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭mongodb："><span class="nav-number">2.</span> <span class="nav-text">关闭mongodb：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登陆mongodb："><span class="nav-number">3.</span> <span class="nav-text">登陆mongodb：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、修改root密码"><span class="nav-number">4.</span> <span class="nav-text">2、修改root密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动mongodb："><span class="nav-number">5.</span> <span class="nav-text">启动mongodb：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登陆mongodb：-1"><span class="nav-number">6.</span> <span class="nav-text">登陆mongodb：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看当前所有账户"><span class="nav-number">7.</span> <span class="nav-text">查看当前所有账户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建新的管理员帐号"><span class="nav-number">8.</span> <span class="nav-text">创建新的管理员帐号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重启服务："><span class="nav-number">9.</span> <span class="nav-text">重启服务：</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黄松辉</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
