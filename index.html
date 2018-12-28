@@ -304,7 +304,27 @@
           
             <h3 id="技术领域"><a href="#技术领域" class="headerlink" title="技术领域"></a>技术领域</h3><p>呼的法国尼斯酒店房间四年的飓风你就感觉到</p>
 <h3 id="生活领域"><a href="#生活领域" class="headerlink" title="生活领域"></a>生活领域</h3><p>东方红噶空间和封建快攻哈吉</p>
-<h3 id="代码区"><a href="#代码区" class="headerlink" title="代码区"></a>代码区</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">go</span> Say(<span class="string">"fock you"</span>)</span><br><span class="line">	Say(<span class="string">"hello word"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Say</span><span class="params">(s <span class="keyword">string</span>)</span></span>  &#123;</span><br><span class="line">	<span class="keyword">for</span> j:=<span class="number">0</span>;j&lt;<span class="number">10</span>;j++ &#123;</span><br><span class="line">		time.Sleep(<span class="number">100</span> * time.Millisecond)</span><br><span class="line">		fmt.Println(s)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="代码区"><a href="#代码区" class="headerlink" title="代码区"></a>代码区</h3><pre><code class="go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;time&quot;
+)
+
+func main()  {
+    go Say(&quot;fock you&quot;)
+    Say(&quot;hello word&quot;)
+}
+
+func Say(s string)  {
+    for j:=0;j&lt;10;j++ {
+        time.Sleep(100 * time.Millisecond)
+        fmt.Println(s)
+    }
+}
+
+</code></pre>
+
           
         
       
