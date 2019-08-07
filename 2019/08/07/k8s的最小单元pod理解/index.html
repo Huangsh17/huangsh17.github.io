@@ -81,15 +81,18 @@
 
 
 
+<meta name="description" content="k8s核心模块在Kubernetes中，最小的管理元素不是一个个独立的容器，而是Pod,Pod是最小的，管理，创建，计划的最小单元. 什么是Pod一个Pod（就像一群鲸鱼，或者一个豌豆夹）相当于一个共享context的配置组，在同一个context下，应用可能还会有独立的cgroup隔离机制，一个Pod是一个容器环境下的“逻辑主机”，它可能包含一个或者多个紧密相连的应用，这些应用可能是在同一个物理">
 <meta name="keywords" content="k8s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="k8s的最小单元pod理解">
 <meta property="og:url" content="http://yoursite.com/2019/08/07/k8s的最小单元pod理解/index.html">
 <meta property="og:site_name" content="全栈工程师">
+<meta property="og:description" content="k8s核心模块在Kubernetes中，最小的管理元素不是一个个独立的容器，而是Pod,Pod是最小的，管理，创建，计划的最小单元. 什么是Pod一个Pod（就像一群鲸鱼，或者一个豌豆夹）相当于一个共享context的配置组，在同一个context下，应用可能还会有独立的cgroup隔离机制，一个Pod是一个容器环境下的“逻辑主机”，它可能包含一个或者多个紧密相连的应用，这些应用可能是在同一个物理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-07T15:27:23.643Z">
+<meta property="og:updated_time" content="2019-08-07T15:53:26.972Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="k8s的最小单元pod理解">
+<meta name="twitter:description" content="k8s核心模块在Kubernetes中，最小的管理元素不是一个个独立的容器，而是Pod,Pod是最小的，管理，创建，计划的最小单元. 什么是Pod一个Pod（就像一群鲸鱼，或者一个豌豆夹）相当于一个共享context的配置组，在同一个context下，应用可能还会有独立的cgroup隔离机制，一个Pod是一个容器环境下的“逻辑主机”，它可能包含一个或者多个紧密相连的应用，这些应用可能是在同一个物理">
 
 
 
@@ -361,7 +364,19 @@
       
 
       
-        
+        <h3 id="k8s核心模块"><a href="#k8s核心模块" class="headerlink" title="k8s核心模块"></a>k8s核心模块</h3><p>在Kubernetes中，最小的管理元素不是一个个独立的容器，而是Pod,Pod是最小的，管理，创建，计划的最小单元.</p>
+<h2 id="什么是Pod"><a href="#什么是Pod" class="headerlink" title="什么是Pod"></a><strong>什么是Pod</strong></h2><p>一个<a href="https://www.kubernetes.org.cn/tags/pod" target="_blank" rel="noopener"><strong>Pod</strong></a>（就像一群鲸鱼，或者一个豌豆夹）相当于一个共享context的配置组，在同一个context下，应用可能还会有独立的cgroup隔离机制，一个Pod是一个容器环境下的“逻辑主机”，它可能包含一个或者多个紧密相连的应用，这些应用可能是在同一个物理主机或虚拟机上。</p>
+<p>Pod 的context可以理解成多个linux命名空间的联合</p>
+<ul>
+<li>PID 命名空间（同一个Pod中应用可以看到其它进程）</li>
+<li>网络 命名空间（同一个Pod的中的应用对相同的IP地址和端口有权限）</li>
+<li>IPC 命名空间（同一个Pod中的应用可以通过VPC或者POSIX进行通信）</li>
+<li>UTS 命名空间（同一个Pod中的应用共享一个主机名称）</li>
+</ul>
+<p>同一个Pod中的应用可以共享磁盘，磁盘是Pod级的，应用可以通过文件系统调用，额外的，一个Pod可能会定义顶级的cgroup隔离，这样的话绑定到任何一个应用（好吧，这句是在没怎么看懂，就是说Pod，应用，隔离）</p>
+<p>由于docker的架构，一个Pod是由多个相关的并且共享磁盘的容器组成，Pid的命名空间共享还没有应用到Docker中</p>
+<p>和相互独立的容器一样，Pod是一种相对短暂的存在，而不是持久存在的，正如我们在Pod的生命周期中提到的，Pod被安排到结点上，并且保持在这个节点上直到被终止（根据重启的设定）或者被删除，当一个节点死掉之后，上面的所有Pod均会被删除。特殊的Pod永远不会被转移到的其他的节点，作为替代，他们必须被replace.</p>
+
       
     </div>
     
@@ -485,8 +500,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -546,6 +570,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#k8s核心模块"><span class="nav-number">1.</span> <span class="nav-text">k8s核心模块</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Pod"><span class="nav-number"></span> <span class="nav-text">什么是Pod</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
