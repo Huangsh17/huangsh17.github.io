@@ -81,16 +81,19 @@
 
 
 
+<meta name="description" content="nginx模块划分架构图： 总共分为6部分： 1.event module:搭建了独立于操作系统的事件处理机制的框架，以及提供了各具体事件的处理，包括ngx_event_module、ngx_event_core_module和ngx_epoll_module等，Nginx具体使用何种事件处理模块，这依赖于具体的操作系统和编译选项。  phase handler:此类型的模块也被直接称为handl">
 <meta name="keywords" content="nginx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx模块划分">
 <meta property="og:url" content="http://yoursite.com/2019/08/08/nginx模块划分/index.html">
 <meta property="og:site_name" content="全栈工程师">
+<meta property="og:description" content="nginx模块划分架构图： 总共分为6部分： 1.event module:搭建了独立于操作系统的事件处理机制的框架，以及提供了各具体事件的处理，包括ngx_event_module、ngx_event_core_module和ngx_epoll_module等，Nginx具体使用何种事件处理模块，这依赖于具体的操作系统和编译选项。  phase handler:此类型的模块也被直接称为handl">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/08/08/nginx模块划分/nginx.png">
-<meta property="og:updated_time" content="2019-08-08T14:43:36.406Z">
+<meta property="og:updated_time" content="2019-08-08T14:54:37.109Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nginx模块划分">
+<meta name="twitter:description" content="nginx模块划分架构图： 总共分为6部分： 1.event module:搭建了独立于操作系统的事件处理机制的框架，以及提供了各具体事件的处理，包括ngx_event_module、ngx_event_core_module和ngx_epoll_module等，Nginx具体使用何种事件处理模块，这依赖于具体的操作系统和编译选项。  phase handler:此类型的模块也被直接称为handl">
 <meta name="twitter:image" content="http://yoursite.com/2019/08/08/nginx模块划分/nginx.png">
 
 
@@ -363,7 +366,24 @@
       
 
       
-        <p><img src="nginx.png" alt=""></p>
+        <h1 id="nginx模块划分"><a href="#nginx模块划分" class="headerlink" title="nginx模块划分"></a>nginx模块划分</h1><p>架构图：<br><img src="nginx.png" alt=""></p>
+<p>总共分为6部分：</p>
+<p>1.event module:搭建了独立于操作系统的事件处理机制的框架，以及提供了各具体事件的处理，包括ngx_event_module、ngx_event_core_module和ngx_epoll_module等，Nginx具体使用何种事件处理模块，这依赖于具体的操作系统和编译选项。</p>
+<ol start="2">
+<li>phase handler:此类型的模块也被直接称为handler模块，主要负责处理客户端请求并产生待响应内容，比如ngx_http_module模块，负责客户端的静态页面请求处理并将对应的磁盘文件准备为响应内容输出。</li>
+</ol>
+<ol start="3">
+<li><p>output filter:也称为filter模块，主要是负责对输出的内容进行处理，可以对输出进行修改，比如可以实现对输出的所有html页面增加预定义的footbar一类的工作，或者对输出的图片的URL进行替换之类的工作。</p>
+<ol start="4">
+<li><p>upstream:实现反向代理功能，将真正的请求转发到后端服务器上，并从后端服务器上读取响应，发回客户端，upstream模块是一种特殊的handler，只不过响应内容不是真正由自己产生的，而是从后端服务器上读取的。</p>
+</li>
+<li><p>load-balancer:负载均衡模块，实现特定的算法，在众多的后端服务器中，选择一个服务器出来作为某个请求的转发服务器。</p>
+</li>
+<li><p>extend module:根据特定业务需要编写的第三方模块</p>
+</li>
+</ol>
+</li>
+</ol>
 
       
     </div>
@@ -488,8 +508,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -549,6 +578,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx模块划分"><span class="nav-number">1.</span> <span class="nav-text">nginx模块划分</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
